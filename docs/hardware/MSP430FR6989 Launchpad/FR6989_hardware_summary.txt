@@ -1,0 +1,50 @@
+MSP430FR6989 Launchpad
+
+Summary of hardware features
+----------------------------
+
+- Segmented LCD (320 segments)
+- 1.8 to 3.6 Volt operation
+- 128Kbytes of FRAM
+- 16 channel 12 bit ADC
+- Comparator 
+- Five timers
+- DMA
+- 256 bit AES
+- 83 GPIOs
+- 2 LEDs
+- 2 buttons
+- reset button
+- 40 pin headers
+- ez-FET on-board emulator
+    - UART                      [stdout?]
+    - SBW interface
+    - Real time power reading   [test later]
+
+
+Serial port access
+------------------
+
+- Use the device manager to find the PC port created (I was com33)
+
+- On the target MSP430FR6989 side, the backchannel is connected to the eUSCI_A1 module. The eZ-FET
+    has a configurable baud rate; therefore, it is important that the PC application configures the baud rate to
+    be the same as what is configured on the eUSCI_A1.
+    
+- The eZ-FET also supports hardware flow control, if desired. Hardware flow control (CTS and RTS
+    handshaking) allows the target MSP430FR6989 and the emulator to tell each other to wait before sending
+    more data. At low baud rates and with simple target applications, flow control may not be necessary.
+    Applications with higher baud rates and more interrupts to service have a higher likelihood that the will not
+    be able to read the eUSCI_A1 RXBUF register in time, before the next byte arrives. If this happens, the
+    eUSCI_A1 UCA1STATW register reports an overrun error.
+
+See hardware documentation for FR6989 at
+http://dev.ti.com/tirex/explore/node?devtools=MSP-EXP430FR6989&node=AH9DDNBjhsA8tE2WzN87Fw__FUz-xrs__LATEST
+
+- Download the example code for your platform from TI at:
+https://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSP-EXP430FR6989/latest/index_FDS.html
+
+its called "MSP-EXP430FR6989_Software_Examples_windows.zip" for the windows version.
+
+
+
